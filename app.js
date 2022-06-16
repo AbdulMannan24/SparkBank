@@ -53,24 +53,6 @@ connection.query('select * from Customers', function(err, result) {
 
 // home page
 app.get('/', function(req,res) {
-    let sql = 'select * from Customers;';
-    cust =[];
-    email = [];
-    cash = [];
-    connection.query(sql, function(err, result) {
-            if (err) throw err;
-           // let data = JSON.parse(result)
-           // console.log (data);
-            result.forEach(element => {
-                let name = element.name;
-                let ema = element.email;
-                let balance = element.AccountBalance;
-                cust.push(name);
-                email.push(ema);
-                cash.push(balance);
-               // console.log(balance);
-            });
-    })
     res.render('home');
 })
 
@@ -117,16 +99,16 @@ app.post('/transfer', function(req,res) {
      //just update sbalance and rbalance tomorrow
      setTimeout(()=>{
         let upcust1 = 'update Customers set AccountBalance = ? where name = ?';
-    connection.query(upcust1,[sbalance,sender],function(err,result,fields) {
+        connection.query(upcust1,[sbalance,sender],function(err,result,fields) {
         if (err) throw err;
         console.log('sender balance updated');
-    }) 
+        }) 
 
-    let upcust2 = `update Customers set AccountBalance = ? where name = ?`;
-    connection.query(upcust2,[rbalance, receiver],function(err,result,fields) {
+        let upcust2 = `update Customers set AccountBalance = ? where name = ?`;
+        connection.query(upcust2,[rbalance, receiver],function(err,result,fields) {
         if (err) throw err;
         console.log('receiver balance updated');
-    })
+        })
         // his.push(sender);
         // his1.push(receiver);
         // his2.push(amount);
@@ -152,6 +134,27 @@ app.post('/transfer', function(req,res) {
             })
         });
        
+    },7000)
+    
+    setTimeout(()=> {
+        let sql = 'select * from Customers;';
+        cust =[];
+        email = [];
+        cash = [];
+        connection.query(sql, function(err, result) {
+            if (err) throw err;
+           // let data = JSON.parse(result)
+           // console.log (data);
+            result.forEach(element => {
+                let name = element.name;
+                let ema = element.email;
+                let balance = element.AccountBalance;
+                cust.push(name);
+                email.push(ema);
+                cash.push(balance);
+               // console.log(balance);
+            });
+    })
     },7000)
     console.log(sender);
     console.log(receiver);
