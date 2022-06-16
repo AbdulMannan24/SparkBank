@@ -54,13 +54,11 @@ connection.query('select * from Customers', function(err, result) {
 // home page
 app.get('/', function(req,res) {
     let sql = 'select * from Customers;';
-        cust =[];
-        email = [];
-        cash = [];
+    cust =[];
+    email = [];
+    cash = [];
         connection.query(sql, function(err, result) {
             if (err) throw err;
-           // let data = JSON.parse(result)
-           // console.log (data);
             result.forEach(element => {
                 let name = element.name;
                 let ema = element.email;
@@ -68,9 +66,8 @@ app.get('/', function(req,res) {
                 cust.push(name);
                 email.push(ema);
                 cash.push(balance);
-               // console.log(balance);
             });
-    })
+        })
     res.render('home');
 })
 
@@ -90,6 +87,7 @@ app.post('/transfer', function(req,res) {
     let amount = Number(req.body.amount);
     let ssql = 'select * from Customers where name = ' + '"' + sender + '"'; 
     let sbalance = 0;
+
     connection.query(ssql, function(err, result){
         result.forEach(element => {
             if (sender === element.name) {
@@ -130,7 +128,7 @@ app.post('/transfer', function(req,res) {
         // his.push(sender);
         // his1.push(receiver);
         // his2.push(amount);
-    },5000);
+    },6000);
     
     setTimeout(()=>{
         let trans = 'insert into Transfers values(?,?,?)';
