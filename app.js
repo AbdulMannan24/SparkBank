@@ -53,6 +53,24 @@ connection.query('select * from Customers', function(err, result) {
 
 // home page
 app.get('/', function(req,res) {
+    let sql = 'select * from Customers;';
+        cust =[];
+        email = [];
+        cash = [];
+        connection.query(sql, function(err, result) {
+            if (err) throw err;
+           // let data = JSON.parse(result)
+           // console.log (data);
+            result.forEach(element => {
+                let name = element.name;
+                let ema = element.email;
+                let balance = element.AccountBalance;
+                cust.push(name);
+                email.push(ema);
+                cash.push(balance);
+               // console.log(balance);
+            });
+    })
     res.render('home');
 })
 
@@ -136,26 +154,6 @@ app.post('/transfer', function(req,res) {
        
     },7000)
     
-    setTimeout(()=> {
-        let sql = 'select * from Customers;';
-        cust =[];
-        email = [];
-        cash = [];
-        connection.query(sql, function(err, result) {
-            if (err) throw err;
-           // let data = JSON.parse(result)
-           // console.log (data);
-            result.forEach(element => {
-                let name = element.name;
-                let ema = element.email;
-                let balance = element.AccountBalance;
-                cust.push(name);
-                email.push(ema);
-                cash.push(balance);
-               // console.log(balance);
-            });
-    })
-    },7000)
     console.log(sender);
     console.log(receiver);
     console.log(amount);
