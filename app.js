@@ -133,7 +133,7 @@ app.post('/transfer', function(req,res) {
     },5000);
     
     setTimeout(()=>{
-        let trans = 'insert into transfers values(?,?,?)';
+        let trans = 'insert into Transfers values(?,?,?)';
         connection.query(trans,[sender,receiver,amount], function(err,result) {
             if (err) throw err;
             console.log("transferred succesfully");
