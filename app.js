@@ -33,13 +33,13 @@ let his = [];
 let his1 = [];
 let his2 = [];
 
-connection.query('select * from Transfers', function(err,result) {
-    result.forEach(element=> {
-        his.push(element.sender);
-        his1.push(element.receiver);
-        his2.push(element.cash);
-    })
-});
+// connection.query('select * from Transfers', function(err,result) {
+//     result.forEach(element=> {
+//         his.push(element.sender);
+//         his1.push(element.receiver);
+//         his2.push(element.cash);
+//     })
+// });
 connection.query('select * from Customers', function(err, result) {
     if (err) throw err;
    // let data = JSON.parse(result)
@@ -141,30 +141,30 @@ app.post('/transfer', function(req,res) {
         // his2.push(amount);
     },5000);
     
-    setTimeout(()=>{
-        let trans = 'insert into transfers values(?,?,?)';
-        connection.query(trans,[sender,receiver,amount], function(err,result) {
-            if (err) throw err;
-            console.log("transferred succesfully");
-            // his.push(sender);
-            // his1.push(receiver);
-            // his2.push(amount);
-        })
-    },6000)
-    setTimeout(()=> {
-        his = [];
-        his1 = [];
-        his2 = [];
+    // setTimeout(()=>{
+    //     let trans = 'insert into transfers values(?,?,?)';
+    //     connection.query(trans,[sender,receiver,amount], function(err,result) {
+    //         if (err) throw err;
+    //         console.log("transferred succesfully");
+    //         // his.push(sender);
+    //         // his1.push(receiver);
+    //         // his2.push(amount);
+    //     })
+    // },6000)
+    // setTimeout(()=> {
+    //     his = [];
+    //     his1 = [];
+    //     his2 = [];
         
-        connection.query('select * from Transfers', function(err,result) {
-            result.forEach(element=> {
-                his.push(element.sender);
-                his1.push(element.receiver);
-                his2.push(element.cash);
-            })
-        });
+    //     connection.query('select * from Transfers', function(err,result) {
+    //         result.forEach(element=> {
+    //             his.push(element.sender);
+    //             his1.push(element.receiver);
+    //             his2.push(element.cash);
+    //         })
+    //     });
        
-    },7000)
+    // },7000)
     console.log(sender);
     console.log(receiver);
     console.log(amount);
