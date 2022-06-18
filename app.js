@@ -128,7 +128,7 @@ app.post('/transfer', function(req,res) {
         // his.push(sender);
         // his1.push(receiver);
         // his2.push(amount);
-    },6000);
+    },3000);
     
     setTimeout(()=>{
         let trans = 'insert into Transfers values(?,?,?)';
@@ -136,7 +136,7 @@ app.post('/transfer', function(req,res) {
             if (err) throw err;
             console.log("transferred succesfully");
         })
-    },6000)
+    },3000)
     setTimeout(()=> {
         his = [];
         his1 = [];
@@ -150,7 +150,7 @@ app.post('/transfer', function(req,res) {
             })
         });
        
-    },7000)
+    },4000)
     
     console.log(sender);
     console.log(receiver);
