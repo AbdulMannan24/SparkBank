@@ -6,9 +6,9 @@ const mysql = require("mysql2");
 // db definition
 const connection = mysql.createConnection({
     host: 'sql6.freemysqlhosting.net',
-    user: 'sql6500131',
-    password: 'upQ2BlcbsL',
-    database: 'sql6500131',
+    user: 'sql6498675',
+    password: 'wrJmLMRQMS',
+    database: 'sql6498675',
     port : 3306
 })
 
@@ -57,6 +57,7 @@ app.get('/', function(req,res) {
     cust =[];
     email = [];
     cash = [];
+    connection.connect()
         connection.query(sql, function(err, result) {
             if (err) throw err;
             result.forEach(element => {
@@ -68,6 +69,7 @@ app.get('/', function(req,res) {
                 cash.push(balance);
             });
         })
+        connection.end();
     res.render('home');
 })
 
@@ -87,7 +89,7 @@ app.post('/transfer', function(req,res) {
     let amount = Number(req.body.amount);
     let ssql = 'select * from Customers where name = ' + '"' + sender + '"'; 
     let sbalance = 0;
-
+    connection.connect()
     connection.query(ssql, function(err, result){
         result.forEach(element => {
             if (sender === element.name) {
@@ -110,7 +112,6 @@ app.post('/transfer', function(req,res) {
                 console.log(rbalance);
             }
         })
-    
     })
      //just update sbalance and rbalance tomorrow
      setTimeout(()=>{
@@ -149,7 +150,7 @@ app.post('/transfer', function(req,res) {
                 his2.push(element.cash);
             })
         });
-       
+        connection.end()
     },4000)
     
     console.log(sender);
@@ -169,3 +170,11 @@ app.get('/history', function(req,res) {
 app.listen(process.env.PORT || 3000,()=> {
     console.log("Server Started:3000");
 });
+
+// let tb = 'delete from Transfers where cash = ?';
+// let ca = 15;
+// connection.connect()
+// connection.query(tb,[ca], function(err,res) {
+//     if (err) throw err;
+//     console.log("done");
+// })
