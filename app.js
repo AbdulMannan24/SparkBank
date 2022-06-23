@@ -69,7 +69,7 @@ app.get('/', function(req,res) {
                 cash.push(balance);
             });
         })
-        connection.end();
+
     res.render('home');
 })
 
@@ -150,7 +150,6 @@ app.post('/transfer', function(req,res) {
                 his2.push(element.cash);
             })
         });
-        connection.end()
     },4000)
     
     console.log(sender);
