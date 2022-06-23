@@ -57,7 +57,6 @@ app.get('/', function(req,res) {
     cust =[];
     email = [];
     cash = [];
-    connection.connect()
         connection.query(sql, function(err, result) {
             if (err) throw err;
             result.forEach(element => {
@@ -89,7 +88,6 @@ app.post('/transfer', function(req,res) {
     let amount = Number(req.body.amount);
     let ssql = 'select * from Customers where name = ' + '"' + sender + '"'; 
     let sbalance = 0;
-    connection.connect()
     connection.query(ssql, function(err, result){
         result.forEach(element => {
             if (sender === element.name) {
